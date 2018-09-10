@@ -6,7 +6,7 @@
 
 frameCount					//当前帧数
 
-width
+width						//
 
 height
 
