@@ -105,3 +105,55 @@ $ `git reset` --hard 5185793		#回退到版本号开头是5185793到版本
 ---
 
 长度为40的十六进制字符串
+
+
+
+##### fatel:Could not read from remote repository
+
+---
+
+`cd ~/.ssh ls`
+
+`ls`				#检测ssh key
+
+id_rsa	id_rsa.pub	known_hosts		#☑️
+
+
+
+解决：
+
+`ssh-keygen -t rsa -C "name"`		#name➡️git用户名
+
+`ssh -v git@github.com`
+
+最后两句会出现：
+
+No more authentication methods to try.  
+
+Permission denied (publickey).
+
+`ssh-agent -s`
+
+SSH_AUTH_SOCK=/tmp/ssh-GTpABX1a05qH/agent.404; export SSH_AUTH_SOCK;  
+
+SSH_AGENT_PID=13144; export SSH_AGENT_PID;  
+
+`ssh-add ~/.ssh/id_rsa`
+
+Identity added: ...
+
+>如果出现错误提示：
+>
+>Could not open a connection to your authentication agent.
+>
+>请执行命令：`eval ssh-agent -s `后继续执行命令 ssh-add ~/.ssh/id_rsa
+
+`cat ~/.ssh/id_rsa.pub`
+
+ssh-rsa AAAAB...
+
+复制key到GitHub账号
+
+`ssh -T git@github.com`			#验证key
+
+Hi xxx! You've successfully authenticated, but GitHub does not provide shell  access.
