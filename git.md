@@ -34,7 +34,7 @@ $ `git status`					#查看版本库状态
 
 $ pwd							#显示当前路径
 
-$ cd repositoryname				#切换到版本库到工作目录
+$ cd repositoryname				#切换到repositoryname目录
 
 $ ls								#显示目录
 
@@ -68,11 +68,33 @@ $ `git reflog` 					#查看指令记录
 
 ---
 
-$ `git remote add` <shortname> <url>	#关联新的远程库
+$ `git remote add` <remotename> <url>	#关联新的远程库
 
-$ `git push` origin master					#本地库推送到远程库
+$ `git remote` -v							#列出当前配置的远程库
+
+$ `git push`  <remotename> <branch>		#本地库推送到远程库
 
 > `$git push` -u origin master				#首次推送
+
+$ `git pull`  <remotename> <branch>		#下载远程库
+
+
+
+##### branch命令
+
+---
+
+$ `git branch`					#查看分支
+
+$ `git branch` <name>			#创建分支
+
+$ `git checkout` <name>			#切换分支
+
+$ `git checkout` -b <name>		#创建并切换分支
+
+$ `git merge` <name>				#合并name分支到当前分支
+
+$ `git branch` -d <name>			删除分支
 
 
 
@@ -100,6 +122,14 @@ $ `git reset` --hard 5185793		#回退到版本号开头是5185793到版本
 
 
 
+##### help
+
+---
+
+$ `git help`						#查看帮助
+
+
+
 ##### 版本号
 
 ---
@@ -108,51 +138,19 @@ $ `git reset` --hard 5185793		#回退到版本号开头是5185793到版本
 
 
 
-##### fatel:Could not read from remote repository
+##### 创建SSH Key
 
 ---
 
-`cd ~/.ssh ls`
+`ssh-keygen -t rsa -C "git-username/e-mail"`
 
-`ls`				#检测ssh key
+用户主目录>.ssh>id_rsa(私钥)、id_rsa.pub(公钥)
 
-id_rsa	id_rsa.pub	known_hosts		#☑️
+复制公钥
+
+github.com>Account Settings>SSH Key>Add SSH Key
 
 
-
-解决：
-
-`ssh-keygen -t rsa -C "name"`		#name➡️git用户名
-
-`ssh -v git@github.com`
-
-最后两句会出现：
-
-No more authentication methods to try.  
-
-Permission denied (publickey).
-
-`ssh-agent -s`
-
-SSH_AUTH_SOCK=/tmp/ssh-GTpABX1a05qH/agent.404; export SSH_AUTH_SOCK;  
-
-SSH_AGENT_PID=13144; export SSH_AGENT_PID;  
-
-`ssh-add ~/.ssh/id_rsa`
-
-Identity added: ...
-
->如果出现错误提示：
->
->Could not open a connection to your authentication agent.
->
->请执行命令：`eval ssh-agent -s `后继续执行命令 ssh-add ~/.ssh/id_rsa
-
-`cat ~/.ssh/id_rsa.pub`
-
-ssh-rsa AAAAB...
-
-复制key到GitHub账号
 
 `ssh -T git@github.com`			#验证key
 
